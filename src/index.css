@@ -5,24 +5,26 @@
   --bg-color: #f2f9ea;
   --primary: #176a21;
   --primary-container: #9df197;
-  --secondary: #b60d3d; /* Strawberry Red */
+  --secondary: #b60d3d;
+  /* Strawberry Red */
   --secondary-container: #ffc2c6;
-  --tertiary: #7f30c3; /* Octopus Purple */
+  --tertiary: #7f30c3;
+  /* Octopus Purple */
   --tertiary-container: #cf9aff;
-  
+
   --on-background: #2a3127;
   --on-surface-variant: #575e52;
-  
+
   --surface: #f2f9ea;
   --surface-container: #e2ebda;
   --surface-container-high: #dce6d4;
   --surface-container-lowest: #ffffff;
   --surface-variant: #d6e0cd;
-  
+
   /* Typography */
   --font-display: 'Plus Jakarta Sans', sans-serif;
   --font-body: 'Manrope', sans-serif;
-  
+
   /* Shadows & Depth */
   --shadow-ambient: 0 8px 32px rgba(42, 49, 39, 0.06);
 }
@@ -41,7 +43,10 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
-h1, h2, h3, .display-text {
+h1,
+h2,
+h3,
+.display-text {
   font-family: var(--font-display);
   font-weight: 700;
   letter-spacing: -0.02em;
@@ -111,4 +116,20 @@ h1, h2, h3, .display-text {
 .text-muted {
   color: var(--on-surface-variant);
   font-size: 0.9rem;
+}
+
+.fade-in {
+  animation: fadeIn 0.8s ease-out forwards;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }

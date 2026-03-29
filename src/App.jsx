@@ -2,10 +2,19 @@ import React, { useState } from 'react';
 import './index.css';
 import Scanner from './components/Scanner';
 
-const SeasonalItem = ({ name, category, price, isNewInSeason, isLocal }) => (
-  <div className="card-secondary" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+const SeasonalItem = ({ name, category, price, isNewInSeason, isLocal, isNew, trend }) => (
+  <div className={`card-secondary ${isNew ? 'fade-in' : ''}`} style={{
+    display: 'flex',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    border: isNew ? '2px solid var(--primary)' : 'none',
+    boxShadow: isNew ? '0 0 16px rgba(56, 107, 44, 0.2)' : 'none'
+  }}>
     <div>
-      <h3 style={{ fontSize: '1.1rem', marginBottom: '4px' }}>{name}</h3>
+      <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '4px' }}>
+        <h3 style={{ fontSize: '1.1rem', margin: 0 }}>{name}</h3>
+        {isNew && <span className="chip" style={{ background: 'var(--primary)', color: 'white', fontSize: '0.7rem' }}>NEW</span>}
+      </div>
       <div style={{ display: 'flex', gap: '8px', flexWrap: 'wrap' }}>
         <span className={`chip ${category === '제철' ? 'chip-seasonal' : 'chip-luxury'}`}>{category}</span>
         {isLocal && <span className="chip" style={{ background: '#e8f5e9', color: '#2e7d32', fontSize: '0.75rem' }}>로컬푸드</span>}
@@ -14,7 +23,11 @@ const SeasonalItem = ({ name, category, price, isNewInSeason, isLocal }) => (
     </div>
     <div style={{ textAlign: 'right' }}>
       <div style={{ fontWeight: '700', fontSize: '1.2rem' }}>{price.toLocaleString()}원</div>
-      <div className="text-muted">하나로마트 보라점</div>
+      {trend && (
+        <div style={{ fontSize: '0.8rem', color: trend.type === 'down' ? '#2e7d32' : '#c62828', fontWeight: '600' }}>
+          {trend.type === 'down' ? '▼' : '▲'} 작년 대비 {trend.diff.toLocaleString()}원 {trend.type === 'down' ? '저렴' : '인상'}
+        </div>
+      )}
     </div>
   </div>
 );
@@ -30,12 +43,13 @@ function App() {
 
   const handleScanComplete = (scanResult) => {
     const newItems = scanResult.items.map(item => ({
-      name: item.name,
-      category: item.isSeasonal ? '제철' : '일반',
-      price: item.price,
-      isNewInSeason: true
+      ...item,
+      isNew: true,
+      trend: item.name.includes('달래') ? { type: 'down', diff: 800 } :
+        item.name.includes('토마토') ? { type: 'up', diff: 1200 } : null
     }));
-    setItems([...newItems, ...items]);
+    setItems((prev) => [...newItems, ...prev]);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
   return (
