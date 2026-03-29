@@ -72,6 +72,34 @@ function App() {
           </div>
         </div>
       </section>
+      <section style={{ marginTop: '32px' }}>
+        <h2 style={{ fontSize: '1.4rem', marginBottom: '16px', color: 'var(--on-background)' }}>여름 미리보기 ☀️</h2>
+        <div className="card" style={{ background: '#fff9e6', borderLeft: '4px solid #fbc02d' }}>
+          <h3 style={{ fontSize: '1.1rem', marginBottom: '8px' }}>6월 장바구니 추천</h3>
+          <ul style={{ paddingLeft: '20px', fontSize: '0.95rem', color: '#575e52', lineHeight: '1.6' }}>
+            <li>복수박 & 수박 (초여름 수분 충전)</li>
+            <li>에어컨 필터 & 미니 선풍기 (더위 대비)</li>
+            <li>습기 제거제 & 장마철 필수품</li>
+            <li>삼계탕 밀키트 (미리 챙기는 초복)</li>
+          </ul>
+        </div>
+      </section>
+
+      <section style={{ marginTop: '24px' }}>
+        <h2 style={{ fontSize: '1.4rem', marginBottom: '16px' }}>봄철 생활 가이드</h2>
+        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '12px' }}>
+          <div className="card-secondary" style={{ padding: '16px' }}>
+            <div style={{ fontSize: '1.5rem', marginBottom: '8px' }}>😷</div>
+            <strong style={{ display: 'block', fontSize: '1rem', marginBottom: '4px' }}>미세먼지 대비</strong>
+            <span className="text-muted" style={{ fontSize: '0.85rem' }}>공기청정기 필터 교체 주기에요.</span>
+          </div>
+          <div className="card-secondary" style={{ padding: '16px' }}>
+            <div style={{ fontSize: '1.5rem', marginBottom: '8px' }}>🧺</div>
+            <strong style={{ display: 'block', fontSize: '1rem', marginBottom: '4px' }}>봄맞이 빨래</strong>
+            <span className="text-muted" style={{ fontSize: '0.85rem' }}>겨울 이불 세탁 및 압축 보관 추천!</span>
+          </div>
+        </div>
+      </section>
 
       <Scanner onScanComplete={handleScanComplete} />
 
