@@ -1,20 +1,30 @@
 import React, { useState } from 'react';
+import { Camera, CameraResultType } from '@capacitor/camera';
+import { Haptics, ImpactStyle } from '@capacitor/haptics';
 
 const Scanner = ({ onScanComplete }) => {
     const [isScanning, setIsScanning] = useState(false);
     const [previewUrl, setPreviewUrl] = useState(null);
     const [scanText, setScanText] = useState('영수증 분석 중...');
 
-    const handleFileChange = (e) => {
-        const file = e.target.files[0];
-        if (file) {
-            const url = URL.createObjectURL(file);
-            setPreviewUrl(url);
-            startScan();
+    const takePhoto = async () => {
+        try {
+            const image = await Camera.getPhoto({
+                quality: 90,
+                allowEditing: true,
+                resultType: CameraResultType.Uri
+            });
+
+            if (image) {
+                setPreviewUrl(image.webPath);
+                startScan();
+            }
+        } catch (error) {
+            console.error('Camera cancelled or failed', error);
         }
     };
 
-    const startScan = () => {
+    const startScan = async () => {
         setIsScanning(true);
         setScanText('이미지 로딩 중...');
 
@@ -23,7 +33,10 @@ const Scanner = ({ onScanComplete }) => {
         setTimeout(() => setScanText('품목 및 가격 매칭 중...'), 2000);
         setTimeout(() => setScanText('분석 완료!'), 3000);
 
-        setTimeout(() => {
+        setTimeout(async () => {
+            // Native Haptic Feedback on completion
+            await Haptics.impact({ style: ImpactStyle.Heavy });
+
             setIsScanning(false);
             setPreviewUrl(null);
             onScanComplete({
@@ -40,14 +53,6 @@ const Scanner = ({ onScanComplete }) => {
 
     return (
         <div style={{ position: 'fixed', bottom: '32px', left: '24px', right: '24px', zIndex: 1000 }}>
-            <input
-                type="file"
-                id="receipt-upload"
-                accept="image/*"
-                style={{ display: 'none' }}
-                onChange={handleFileChange}
-            />
-
             {isScanning ? (
                 <div style={{
                     background: 'rgba(56, 107, 44, 0.95)',
@@ -73,9 +78,9 @@ const Scanner = ({ onScanComplete }) => {
                     </div>
                 </div>
             ) : (
-                <label htmlFor="receipt-upload" className="btn-primary" style={{ cursor: 'pointer', textAlign: 'center', display: 'block' }}>
-                    새 영수증 스캔하기
-                </label>
+                <button onClick={takePhoto} className="btn-primary" style={{ cursor: 'pointer', textAlign: 'center', width: '100%', border: 'none' }}>
+                    영수증 촬영 및 스캔
+                </button>
             )}
 
             <style>{`

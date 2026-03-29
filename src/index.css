@@ -55,7 +55,9 @@ h3,
 .container {
   max-width: 600px;
   margin: 0 auto;
-  padding: 2rem 1.5rem;
+  padding: 1.5rem;
+  padding-top: calc(1.5rem + env(safe-area-inset-top));
+  padding-bottom: 120px;
 }
 
 /* Base Utility Classes */

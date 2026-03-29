@@ -23,26 +23,42 @@
 - **여름 미리보기**: 다가올 계절(여름)에 필요한 수박, 에어컨 필터 등 필수 구매 리스트를 미리 제안합니다.
 - **봄철 생활 팁**: 미세먼지 마스크, 봄맞이 침구 세탁 등 계절에 맞는 가사용품 정보를 제공합니다.
 
+### 5. 안드로이드 앱 (Samsung One UI 최적화)
+- **네이티브 카메라**: 웹 업로드 대신 기기의 카메라를 직접 호출하여 영수증을 촬영합니다.
+- **햅틱 피드백**: 분석 완료 시 기기의 진동을 통해 직관적인 피드백을 제공합니다.
+- **One UI 레이아웃**: 삼성 갤럭시 폰에 최적화된 상단 상태바 처리 및 한 손 조작 레이아웃을 반영했습니다.
+
 ## 🛠 Tech Stack
 - **Frontend**: React (Hooks), Vite
+- **Native Bridge**: Capacitor
 - **Styling**: Vanilla CSS (Glassmorphism, CSS Variables)
 - **Design System**: [Stitch MCP](https://stitch.mcp) 기반 커스텀 테마
-- **Deployment**: GitHub Pages
+- **Deployment**: GitHub Pages (Web), Android Studio (Native)
 
 ## 📦 시작하기 (Getting Started)
 
+### Web (Browser)
 1. 저장소를 클론합니다.
    ```bash
    git clone https://github.com/Shiene1010/BookKeepingApp.git
    ```
-2. 의존성을 설치합니다.
+2. 의존성을 설치하고 실행합니다.
    ```bash
    npm install
-   ```
-3. 개발 서버를 실행합니다.
-   ```bash
    npm run dev
    ```
+
+### Android (Mobile)
+1. 빌드 및 동기화를 수행합니다.
+   ```bash
+   npm run build
+   npx cap sync android
+   ```
+2. Android Studio에서 프로젝트를 엽니다.
+   ```bash
+   npx cap open android
+   ```
+3. 에뮬레이터나 실기기(삼성 갤럭시 등)에서 실행(Run) 버튼을 누릅니다.
 
 ## 📸 Screenshots
 ![Dashboard Preview](https://github.com/Shiene1010/BookKeepingApp/raw/main/public/preview.png)

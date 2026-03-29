@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">BookKeepingApp</string>
+    <string name="title_activity_main">BookKeepingApp</string>
+    <string name="package_name">com.shiene1010.bookkeepingapp</string>
+    <string name="custom_url_scheme">com.shiene1010.bookkeepingapp</string>
+</resources>
